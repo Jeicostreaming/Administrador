@@ -8,6 +8,7 @@ let prodPaginaActual = 1;
 let prodTotalPaginas = 1;
 let prodLimitePagina = 10; 
 let productoEditandoID = null;
+let serviciosPrecioCache = {};
 
 document.addEventListener('moduloCargado', (e) => {
     if (e.detail.modulo === 'mod-productos-todos') {
@@ -770,7 +771,8 @@ window.abrirModalGestionCaducada = function(objEncoded) {
         b.style.boxShadow = 'none'; b.style.transform = 'scale(1)'; b.style.filter = 'grayscale(0%)';
     });
 
-    document.getElementById('gestion-precio').value = prod.precio_compra || 0; 
+    const precioServicioActual = serviciosPrecioCache[prod.servicio_nombre] ?? prod.precio_compra ?? 0;
+    document.getElementById('gestion-precio').value = precioServicioActual;
     
     abrirModal('modal-gestionar-caducada');
 };
@@ -818,6 +820,7 @@ async function cargarServiciosEnSelectProd(idSelect, nombreSeleccionado = null) 
             // 🔥 NUEVO: Guardamos el flag de si es cuenta completa para la validación
             option.dataset.cuenta_completa = srv.cuenta_completa || 'no'; 
             option.textContent = srv.nombre;
+            serviciosPrecioCache[srv.nombre] = parseFloat(srv.precio) || 0;
             
             if (nombreSeleccionado && srv.nombre === nombreSeleccionado) {
                 option.selected = true;
