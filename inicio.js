@@ -385,7 +385,7 @@ async function subirImagenADrive(file) {
                 };
 
                 try {
-                    const scriptUrl = "https://script.google.com/macros/s/AKfycbxn0qc2Rc5S1QMZlzRLFhygt0MZUz6E4sJ0JfkEukHPPzzIAZZl1RMOavhRv1JksbcD/exec";
+                    const scriptUrl = "https://script.google.com/macros/s/AKfycbxSFY7ofodKoIzzvHxWOTk_sX9AzuJ6dW37AKO9RkAUsN6XxnO9CLzODHh82dVvEnZ8/exec";
                     
                     const response = await fetch(scriptUrl, {
                         method: "POST",
